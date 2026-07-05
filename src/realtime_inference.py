@@ -6,7 +6,7 @@ import time
 from model import LSTMAutoencoder
 
 MODELS_DIR = os.path.join(os.path.dirname(__file__), "..", "models")
-WINDOW_SIZE = 400
+WINDOW_SIZE = 64
 
 class LSTMAnomalyDetectorRealtime:
     def __init__(self, model_path=None, scaler_mean_path=None, scaler_scale_path=None, threshold=None):

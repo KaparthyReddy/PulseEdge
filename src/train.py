@@ -9,9 +9,9 @@ from preprocess import prepare_dataset
 from model import LSTMAutoencoder
 
 MODELS_DIR = os.path.join(os.path.dirname(__file__), "..", "models")
-EPOCHS = 30
-BATCH_SIZE = 32
-LR = 1e-3
+EPOCHS = 50
+BATCH_SIZE = 64
+LR = 5e-3
 
 def train():
     signals = load_all_signals()
@@ -33,6 +33,7 @@ def train():
             out = model(x)
             loss = criterion(out, x)
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=5.0)
             optimizer.step()
             total_loss += loss.item()
         print(f"Epoch {epoch+1}/{EPOCHS}, Loss: {total_loss/len(loader):.6f}")

@@ -8,7 +8,8 @@ class LSTMAutoencoder(nn.Module):
         self.encoder_fc = nn.Linear(hidden_size, latent_size)
 
         self.decoder_fc = nn.Linear(latent_size, hidden_size)
-        self.decoder_lstm = nn.LSTM(hidden_size, input_size, num_layers, batch_first=True)
+        self.decoder_lstm = nn.LSTM(hidden_size, hidden_size, num_layers, batch_first=True)
+        self.output_fc = nn.Linear(hidden_size, input_size)
 
     def forward(self, x):
         _, (h_n, _) = self.encoder_lstm(x)
@@ -17,4 +18,5 @@ class LSTMAutoencoder(nn.Module):
         seq_len = x.shape[1]
         decoder_input = self.decoder_fc(latent).unsqueeze(1).repeat(1, seq_len, 1)
         out, _ = self.decoder_lstm(decoder_input)
+        out = self.output_fc(out)
         return out

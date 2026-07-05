@@ -1,8 +1,8 @@
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-WINDOW_SIZE = 400
-STRIDE = 200
+WINDOW_SIZE = 64
+STRIDE = 32
 
 def create_windows(signal, window_size=WINDOW_SIZE, stride=STRIDE):
     windows = []
