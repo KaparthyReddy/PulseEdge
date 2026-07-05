@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+data/*.mat
+data/*.csv
+models/*.pt
+models/*.onnx
+results/*.png
+.venv/
+venv/
+.DS_Store
